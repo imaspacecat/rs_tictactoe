@@ -17,14 +17,14 @@ fn main() {
     let mut game = Game::new();
     let mut input = String::new();
     print!("{}[2J", 27 as char);
-    println!("{:#?}'s turn\nplease input a number between 1-9 corresponding to the desired square:",
+    println!("{}'s turn\nplease input a number between 1-9 corresponding to the desired square:",
              game.current_player);
     println!("{}", game.board);
     while game.get_game_status() == Playing {
         io::stdin().read_line(&mut input).expect("failed to read line");
         let i_input: usize = input.trim().parse().unwrap_or(0);
         input.clear();
-        if i_input > 9 || i_input < 1 {
+        if !(1..=9).contains(&i_input) {
             println!("please enter a number from 1-9");
             continue;
         }
@@ -36,11 +36,11 @@ fn main() {
             Ok(()) => (),
             Err(err) => println!("{}", err)
         }
-        println!("{}", game.board);
 
-        println!("{:#?}'s turn\nplease input a number between 1-9 corresponding to the desired square:",
+        println!("{}", game.board);
+        println!("{}'s turn\nplease input a number between 1-9 corresponding to the desired square:",
                  game.current_player);
     }
 
-    println!("{:#?} won!", game.current_player.opposite())
+    println!("{} won!", game.current_player.opposite())
 }

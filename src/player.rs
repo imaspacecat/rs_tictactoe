@@ -1,11 +1,12 @@
-use std::fmt::{Debug, Formatter};
+use std::fmt::{Debug, Display, Formatter};
 
 #[derive(PartialEq, Copy, Clone)]
 pub enum Player {
     X,
     O
 }
-impl Debug for Player {
+
+impl Display for Player {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         match self {
             Player::X => write!(f, "Cross"),
